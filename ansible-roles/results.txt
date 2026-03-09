@@ -1,0 +1,27 @@
+После выполнения плейбука:
+
+user@DevOps1:~/devops2026/ansible-roles$ curl 10.0.2.16 -H 'Host: fizfak.com'
+<HTML>
+    <BODY>
+        Hello! Site: fizfak.com
+    </BODY>
+</HTML>user@DevOps1:~/devops2026/ansible-roles$ curl 10.0.2.16 -H 'Host: etis.com'
+<HTML>
+    <BODY>
+        Hello! Site: etis.com
+    </BODY>
+</HTML>user@DevOps1:~/devops2026/ansible-roles$ curl 10.0.2.16 -H 'Host: mehmat.ru'
+<HTML>
+    <BODY>
+        Hello! Site: mehmat.ru
+    </BODY>
+</HTML>user@DevOps1:~/devops2026/ansible-roles$ 
+
+После изменения hosts:
+
+user@DevOps1:~/devops2026/ansible-roles$ curl http://etis.com
+<HTML>
+    <BODY>
+        Hello! Site: etis.com
+    </BODY>
+</HTML>user@DevOps1:~/devops2026/ansible-roles$ 

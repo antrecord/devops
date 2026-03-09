@@ -1,0 +1,36 @@
+---
+- name: Deploy nginx
+  hosts: webservers
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - name: Install nginx
+    ansible.builtin.apt:
+      name: nginx
+      state: latest
+      update_cache: yes
+  - name: Copy index
+    ansible.builtin.copy:
+      src: /var/www/html/index.nginx-debian.html
+      dest: /var/www/html/index.nginx-debian.html
+      owner: root
+      group: root
+      mode: '0666'
+  - name: Install NMAP
+    ansible.builtin.apt:
+      name: nmap
+      state: latest
+      update_cache: yes
+  - name: Copy nmap target list
+    ansible.builtin.copy:
+      src: /home/user/devops2026/targets.txt
+      dest: /home/user/devops2026/targets.txt
+      force: true
+      mode: '0644'
+  - name: Run nmap
+    shell: "nmap -iL /home/user/devops2026/targets.txt -p 80 -oG -"
+    register: nmap_result
+  - name: Nmap output
+    debug:
+      msg: "{{ nmap_result.stdout_lines }}"
