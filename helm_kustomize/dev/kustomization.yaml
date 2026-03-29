@@ -1,0 +1,16 @@
+kind: Kustomization
+resources:
+- ../base
+
+namePrefix: dev-
+
+labels:
+- includeSelectors: true
+  pairs:
+    environment: dev
+
+patches:
+- path: service-patch.yaml
+  target:
+    labelSelector: 'svc=flask-front'
+- path: deployment-patch.yaml
